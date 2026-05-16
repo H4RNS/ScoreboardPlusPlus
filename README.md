@@ -1,10 +1,10 @@
 # Scoreboard++
 
-*Scoreboard++* is a Quality Of Life and a utility mod for game **Gorilla Tag**.
+*Scoreboard++* is a Quality Of Life and a utility mod for the game **Gorilla Tag**.
 
 ## Overview:
 
-Scoreboard++ changes the **Gorilla Code Of Conduct** and changes its appearence into a Scoreboard. This allows the player to seamlessly use the Scoreboard in stump rather then haviung to go to the normal Scoreboard in forest. This means that you can **report** or **mute** any user from stump instead of under the gazebo which means that people with anti report wont be kicked when you report them. 
+Scoreboard++ changes the **Gorilla Code Of Conduct** and changes its appearence into a Scoreboard. This allows the player to seamlessly use the Scoreboard in stump rather then having to go to the default Scoreboard in forest. This means that you can **report** or **mute** any user from stump instead of under the gazebo which means that people with anti report wont be kicked when you report them. 
 
 ## Options Page:
 
@@ -12,7 +12,7 @@ Scoreboard++ allows multiple features to make sure that the user has a positive 
 
 This page will be added to in the foresable future but currently the player can toggle:
 
-- **Top Button** <br>
+- **Action Button** <br>
     The player can change the button at the top to function in many different ways. They can make it *disconnect* you from the current room, *Rejoin* the last room you where in,
     *Randomly* join any room or even joining a specific room which you can set in the config file.
 
