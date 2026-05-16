@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BepInEx;
 using ScoreboardPlusPlus.Behaviours;
+using ScoreboardPlusPlus.Tools;
 using UnityEngine;
 
 namespace ScoreboardPlusPlus
@@ -20,6 +21,8 @@ namespace ScoreboardPlusPlus
                 COCTextObjects.Add("Environment Objects/LocalObjects_Prefab/TreeRoom/COCBodyText_TitleData");
 
                 COCTextObjects.ForEach(Object => GameObject.Find(Object).SetActive(false));
+
+                Configuration.BuildFile(Config);
             });
         }
     }

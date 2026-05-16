@@ -13,7 +13,7 @@ namespace ScoreboardPlusPlus.Behaviours
 
         private GameObject Scoreboard, Notice;
         private Transform LineParent;
-
+            
         private void Awake()
         {
             Scoreboard = ContentLoader.GetContent<GameObject>("Scoreboard");

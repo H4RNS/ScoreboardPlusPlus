@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,8 @@ namespace ScoreboardPlusPlus.Behaviours
     public class PushButton : MonoBehaviour
     {
         private float _buttonDelay = 0.25f;
+        private Color _originalColor;
+        private Image _image;
 
         private List<string> _savedButtonInfo = [];
         private Action _onPushButtonPress;
@@ -40,6 +43,8 @@ namespace ScoreboardPlusPlus.Behaviours
             BoxCollider _collider = _obj.GetComponent<BoxCollider>() ?? _obj.AddComponent<BoxCollider>();
             _collider.isTrigger = true;
 
+            _button._originalColor = _obj.GetComponent<Image>().color;
+            _button._image = _obj.GetComponent<Image>();
             return _button;
         }
 
@@ -59,7 +64,22 @@ namespace ScoreboardPlusPlus.Behaviours
                 _buttonIndex = (_buttonIndex + 1) % _savedButtonInfo.Count;
             }
 
+            StartCoroutine(ChangeButtonColour(0.2f));
             _onPushButtonPress.Invoke();
+        }
+
+        private IEnumerator ChangeButtonColour(float _delay)
+        {
+            PushButton _button = GetComponent<PushButton>();
+
+            Color _darkerColour = _button._originalColor * 0.7f;
+            _darkerColour.a = _button._originalColor.a;
+
+            _button._image.color = _darkerColour;
+
+            yield return new WaitForSeconds(_delay);
+
+            _button._image.color = _button._originalColor;
         }
     }
 }

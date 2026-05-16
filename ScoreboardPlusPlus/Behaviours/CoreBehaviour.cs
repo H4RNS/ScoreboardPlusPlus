@@ -1,5 +1,7 @@
 ﻿using System;
+using Photon.Pun;
 using ScoreboardPlusPlus.Tools;
+using ScoreboardPlusPlus.Utilities;
 using UnityEngine;
 
 namespace ScoreboardPlusPlus.Behaviours
@@ -24,11 +26,24 @@ namespace ScoreboardPlusPlus.Behaviours
 
             try
             {
-                PushButton.CreateStatic(_functions.transform.Find("Disconnect"), () =>
+                PushButton.CreateStatic(_functions.transform.Find("QuickAction"), () =>
                 {
-                    NetworkSystem.Instance.ReturnToSinglePlayer();  
+                    switch (Configuration.ActionButton.Value)
+                    {
+                        case Configuration.ActionType.Disconnect:
+                            RoomUtility.ReturnToSinglePlayer();
+                            break;
+
+                        case Configuration.ActionType.JoinRandom:
+                            RoomUtility.AttemptToJoinPublicRoom();
+                            break;
+
+                        case Configuration.ActionType.JoinSpecific:
+                            RoomUtility.AttemptToJoinSpecificRoom();
+                            break;
+                    }
                 });
-                 
+
                 PushButton.CreateDynamic(_functions.transform.Find("Options"), ["Options", "Exit Options"], () =>
                 {
                     var _lineParent = ContentLoader.GetContent<GameObject>("Scoreboard").transform.Find("Canvas/LineParent").gameObject;

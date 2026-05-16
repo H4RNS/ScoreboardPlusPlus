@@ -13,5 +13,7 @@ namespace ScoreboardPlusPlus
         public const string Version = "1.0.0";
 
         public const string BundlePath = "ScoreboardPlusPlus.Content.scoreboard";
+
+        public const string Notice = "Not currently \r\n\tConnected to a room";
     }
 }
