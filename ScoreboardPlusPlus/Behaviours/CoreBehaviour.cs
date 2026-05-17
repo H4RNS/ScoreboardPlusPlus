@@ -23,6 +23,7 @@ namespace ScoreboardPlusPlus.Behaviours
             ContentLoader.LoadContent<GameObject>("Scoreboard", "GorillaScoreBoard++").AddComponent<ScoreboardHandler>();
 
             Transform _functions = ContentLoader.GetContent<GameObject>("Scoreboard").transform.Find("Canvas/Functions");
+            Transform _lineParent = ContentLoader.GetContent<GameObject>("Scoreboard").transform.Find("Canvas/LineParent");
 
             try
             {
@@ -46,8 +47,7 @@ namespace ScoreboardPlusPlus.Behaviours
 
                 PushButton.CreateDynamic(_functions.transform.Find("Options"), ["Options", "Exit Options"], () =>
                 {
-                    var _lineParent = ContentLoader.GetContent<GameObject>("Scoreboard").transform.Find("Canvas/LineParent").gameObject;
-                    _lineParent.SetActive(!_lineParent.activeSelf);
+                    _lineParent.gameObject.SetActive(!_lineParent.gameObject.activeSelf);
                 });
             }
             catch (Exception ex)

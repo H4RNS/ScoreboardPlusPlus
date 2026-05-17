@@ -2,6 +2,7 @@
 using Photon.Realtime;
 using Photon.Voice;
 using Photon.Voice.Unity;
+using ScoreboardPlusPlus.Models;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
@@ -50,23 +51,46 @@ namespace ScoreboardPlusPlus.Utilities
             if (swatch.color != colour) swatch.color = colour;
         }
 
-        /*public static void MutePlayer(NetPlayer player)
+        public static void MutePlayer(NetPlayer player, Transform _MicParent)
         {
             if (player == null) return;
 
             foreach (var line in GorillaScoreboardTotalUpdater.allScoreboardLines)
             {
-                if (line.playerVRRig == player)
+                bool _mute = true;
+                if (line.linePlayer == player)
                 {
-                    line.PressButton(player, GorillaPlayerLineButton.ButtonType.Mute);
+                    if (line.playerVRRig.muted)
+                    {
+                        _mute = false;
+                        _MicParent.gameObject.SetActive(true);
+                        _MicParent.Find("MicMuted").gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        _MicParent.gameObject.SetActive(true);
+                        _MicParent.Find("MicMuted").gameObject.SetActive(true);
+                    }
+                    line.PressButton(_mute, GorillaPlayerLineButton.ButtonType.Mute);
                     break;
                 }
             }
-        }*/
+        }
 
-        public static bool CheckIfTalking(NetPlayer _player, VRRig _rig)
+        public static bool CheckIfTalking(NetPlayer _player)
         {
-            if(_player == null) return false;
+            VRRig _rig = null;
+
+            foreach (VRRig _vrRig in VRRigCache.ActiveRigs)
+            {
+                if (_vrRig != null && _vrRig.Creator == _player)
+                {
+                    _rig = _vrRig;
+                    break;
+                }
+            }
+
+            if (_player == null) return false;
             if(GorillaComputer.instance.voiceChatOn == "FALSE") return false;
 
             if (_rig.remoteUseReplacementVoice || _rig.localUseReplacementVoice)

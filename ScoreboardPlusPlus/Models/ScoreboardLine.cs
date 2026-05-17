@@ -10,6 +10,8 @@ namespace ScoreboardPlusPlus.Models
         public Text Nickname;
         public Image Swatch;
 
+        public Transform MicParent;
+
         public Transform MuteButton;
         public Transform HateSpeechButton;
         public Transform ToxicityButton;

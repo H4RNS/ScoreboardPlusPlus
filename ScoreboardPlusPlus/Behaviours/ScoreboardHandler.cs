@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Photon.Realtime;
+using Photon.Pun;
 using ScoreboardPlusPlus.Models;
 using ScoreboardPlusPlus.Tools;
 using ScoreboardPlusPlus.Utilities;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace ScoreboardPlusPlus.Behaviours
@@ -35,12 +34,16 @@ namespace ScoreboardPlusPlus.Behaviours
                     Nickname = line.Find("Name").GetComponent<Text>(),
                     Swatch = line.Find("Swatch").GetComponent<Image>(),
 
+                    MicParent = line.Find("Micparent"),
+
                     MuteButton = line.Find("InspectOptions/Mute"),
                     HateSpeechButton = line.Find("InspectOptions/HateSpeach"),
                     ToxicityButton = line.Find("InspectOptions/Toxicity"),
                     CheatingButton = line.Find("InspectOptions/Cheating"),
                     InpectButton = line.Find("InspectOptions/Inspect"),
                 };
+
+                playerLine.MicParent.gameObject.SetActive(true);
 
                 PushButton.CreateDynamic(playerLine.InpectButton, ["Inspect", "Close"], () =>
                 {
@@ -54,11 +57,13 @@ namespace ScoreboardPlusPlus.Behaviours
 
                 PushButton.CreateStatic(playerLine.MuteButton, () =>
                 {
-
+                    PlayerUtility.MutePlayer(playerLine.Player, playerLine.MicParent);
                 });
 
                 Lines.Add(playerLine);
             }
+
+            
 
             RoomSystem.JoinedRoomEvent += JoinedRoomEvent;
             RoomSystem.LeftRoomEvent += LeftRoomEvent;
@@ -116,10 +121,18 @@ namespace ScoreboardPlusPlus.Behaviours
         {
             foreach (var line in Lines)
             {
-                if (line.Player == null || line.Player.IsNull)
-                    continue;
+                if (line.Player == null || line.Player.IsNull || !PhotonNetwork.InRoom)
+                    break;
 
                 PlayerUtility.PlayerSwatch(line.Swatch, line.Player);
+
+                if (PlayerUtility.CheckIfTalking(line.Player))
+                    line.MicParent.Find("Mic").gameObject.SetActive(true);
+                else
+                    line.MicParent.Find("Mic").gameObject.SetActive(false);
+
+                if (line.Nickname.ToString() != line.Player.NickName)
+                    line.Nickname.text = line.Player.NickName;
             }
         }
 
