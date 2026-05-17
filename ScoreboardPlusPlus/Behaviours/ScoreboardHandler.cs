@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using Photon.Realtime;
 using ScoreboardPlusPlus.Models;
 using ScoreboardPlusPlus.Tools;
 using ScoreboardPlusPlus.Utilities;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace ScoreboardPlusPlus.Behaviours
@@ -13,7 +15,7 @@ namespace ScoreboardPlusPlus.Behaviours
 
         private GameObject Scoreboard, Notice;
         private Transform LineParent;
-            
+
         private void Awake()
         {
             Scoreboard = ContentLoader.GetContent<GameObject>("Scoreboard");
@@ -24,12 +26,38 @@ namespace ScoreboardPlusPlus.Behaviours
             {
                 line.gameObject.SetActive(false);
 
-                Lines.Add(new ScoreboardLine
+                bool open = false;
+
+                ScoreboardLine playerLine = new()
                 {
                     LocalLine = line.gameObject,
+
                     Nickname = line.Find("Name").GetComponent<Text>(),
-                    Swatch = line.Find("Swatch").GetComponent<Image>()
+                    Swatch = line.Find("Swatch").GetComponent<Image>(),
+
+                    MuteButton = line.Find("InspectOptions/Mute"),
+                    HateSpeechButton = line.Find("InspectOptions/HateSpeach"),
+                    ToxicityButton = line.Find("InspectOptions/Toxicity"),
+                    CheatingButton = line.Find("InspectOptions/Cheating"),
+                    InpectButton = line.Find("InspectOptions/Inspect"),
+                };
+
+                PushButton.CreateDynamic(playerLine.InpectButton, ["Inspect", "Close"], () =>
+                {
+                    open = !open;
+
+                    playerLine.MuteButton.gameObject.SetActive(open);
+                    playerLine.HateSpeechButton.gameObject.SetActive(open);
+                    playerLine.ToxicityButton.gameObject.SetActive(open);
+                    playerLine.CheatingButton.gameObject.SetActive(open);
                 });
+
+                PushButton.CreateStatic(playerLine.MuteButton, () =>
+                {
+
+                });
+
+                Lines.Add(playerLine);
             }
 
             RoomSystem.JoinedRoomEvent += JoinedRoomEvent;

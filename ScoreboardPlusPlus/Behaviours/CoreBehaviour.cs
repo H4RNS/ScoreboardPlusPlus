@@ -31,7 +31,7 @@ namespace ScoreboardPlusPlus.Behaviours
                     switch (Configuration.ActionButton.Value)
                     {
                         case Configuration.ActionType.Disconnect:
-                            RoomUtility.ReturnToSinglePlayer();
+                            RoomUtility.ReturnToSinglePlayer(); 
                             break;
 
                         case Configuration.ActionType.JoinRandom:

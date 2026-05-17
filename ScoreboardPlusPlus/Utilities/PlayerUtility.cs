@@ -50,6 +50,20 @@ namespace ScoreboardPlusPlus.Utilities
             if (swatch.color != colour) swatch.color = colour;
         }
 
+        /*public static void MutePlayer(NetPlayer player)
+        {
+            if (player == null) return;
+
+            foreach (var line in GorillaScoreboardTotalUpdater.allScoreboardLines)
+            {
+                if (line.playerVRRig == player)
+                {
+                    line.PressButton(player, GorillaPlayerLineButton.ButtonType.Mute);
+                    break;
+                }
+            }
+        }*/
+
         public static bool CheckIfTalking(NetPlayer _player, VRRig _rig)
         {
             if(_player == null) return false;

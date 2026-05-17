@@ -7,10 +7,15 @@ namespace ScoreboardPlusPlus.Models
     {
         public GameObject LocalLine;
 
-        public NetPlayer Player;
-
         public Text Nickname;
-
         public Image Swatch;
+
+        public Transform MuteButton;
+        public Transform HateSpeechButton;
+        public Transform ToxicityButton;
+        public Transform CheatingButton;
+        public Transform InpectButton;
+
+        public NetPlayer Player;
     }
 }
