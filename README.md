@@ -25,7 +25,8 @@ This page will be added to in the foresable future but currently the player can 
 ## Image:
 
 This image displays the scoreboard in stump on the code of conduct with the top button toggled to **Disconnect**:
-<img width="382" height="344" alt="image" src="https://github.com/user-attachments/assets/1324b64c-0433-4b99-9692-75367cc7aabe" />
+<img width="382" height="344" alt="Screenshot 2026-05-14 221316" src="https://github.com/user-attachments/assets/9cf330a7-aefa-4a74-a3ca-90d61170507d" />
+
 
 ## Disclaimer:
 <sub><b>This product is not affiliated with Another Axiom Inc. or its videogames Gorilla Tag and Orion Drift and is not endorsed or otherwise sponsored by Another Axiom. Portions of the materials contained herein are property of Another Axiom. ©2021 Another Axiom Inc.</b></sub>
