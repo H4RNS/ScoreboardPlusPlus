@@ -51,27 +51,22 @@ namespace ScoreboardPlusPlus.Utilities
             if (swatch.color != colour) swatch.color = colour;
         }
 
-        public static void MutePlayer(NetPlayer player, Transform _MicParent)
+        public static void MutePlayer(NetPlayer player, Transform micParent)
         {
-            if (player == null) return;
+            if (player == null || micParent == null) return;
 
             foreach (var line in GorillaScoreboardTotalUpdater.allScoreboardLines)
             {
-                bool _mute = true;
                 if (line.linePlayer == player)
                 {
-                    if (line.playerVRRig.muted)
-                    {
-                        _mute = false;
-                        _MicParent.gameObject.SetActive(true);
-                        _MicParent.Find("MicMuted").gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        _MicParent.gameObject.SetActive(true);
-                        _MicParent.Find("MicMuted").gameObject.SetActive(true);
-                    }
-                    line.PressButton(_mute, GorillaPlayerLineButton.ButtonType.Mute);
+                    bool mute = !line.playerVRRig.muted;
+
+                    line.PressButton(mute, GorillaPlayerLineButton.ButtonType.Mute);
+
+                    micParent.gameObject.SetActive(true);
+
+                    micParent.Find("MicMuted").gameObject.SetActive(mute);
+
                     break;
                 }
             }

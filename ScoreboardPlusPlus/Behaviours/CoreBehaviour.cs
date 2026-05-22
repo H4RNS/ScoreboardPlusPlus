@@ -1,8 +1,8 @@
 ﻿using System;
-using Photon.Pun;
 using ScoreboardPlusPlus.Tools;
 using ScoreboardPlusPlus.Utilities;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ScoreboardPlusPlus.Behaviours
 {
@@ -22,7 +22,11 @@ namespace ScoreboardPlusPlus.Behaviours
 
             ContentLoader.LoadContent<GameObject>("Scoreboard", "GorillaScoreBoard++").AddComponent<ScoreboardHandler>();
 
+            // ignore the code below im lazy rn im just pushing so i can work on it later, ts so crappy wah.
             Transform _functions = ContentLoader.GetContent<GameObject>("Scoreboard").transform.Find("Canvas/Functions");
+
+            Text button = _functions.transform.Find("QuickAction/Text").GetComponent<Text>();
+
             Transform _lineParent = ContentLoader.GetContent<GameObject>("Scoreboard").transform.Find("Canvas/LineParent");
 
             try
@@ -32,15 +36,18 @@ namespace ScoreboardPlusPlus.Behaviours
                     switch (Configuration.ActionButton.Value)
                     {
                         case Configuration.ActionType.Disconnect:
-                            RoomUtility.ReturnToSinglePlayer(); 
+                            RoomUtility.ReturnToSinglePlayer();
+                            button.text = "Disconnect";
                             break;
 
                         case Configuration.ActionType.JoinRandom:
                             RoomUtility.AttemptToJoinPublicRoom();
+                            button.text = "Join Random";
                             break;
 
                         case Configuration.ActionType.JoinSpecific:
                             RoomUtility.AttemptToJoinSpecificRoom();
+                            button.text = $"Join Room: {Configuration.RoomCode.Value.ToUpper()}";
                             break;
                     }
                 });

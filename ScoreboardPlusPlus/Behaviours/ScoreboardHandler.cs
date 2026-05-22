@@ -55,15 +55,13 @@ namespace ScoreboardPlusPlus.Behaviours
                     playerLine.CheatingButton.gameObject.SetActive(open);
                 });
 
-                PushButton.CreateStatic(playerLine.MuteButton, () =>
-                {
-                    PlayerUtility.MutePlayer(playerLine.Player, playerLine.MicParent);
-                });
+                /*PushButton.CreateStatic(playerLine.MuteButton, () =>
+                  {
+                      PlayerUtility.MutePlayer(playerLine.Player, playerLine.MicParent);
+                  });*/
 
                 Lines.Add(playerLine);
             }
-
-            
 
             RoomSystem.JoinedRoomEvent += JoinedRoomEvent;
             RoomSystem.LeftRoomEvent += LeftRoomEvent;
@@ -111,7 +109,7 @@ namespace ScoreboardPlusPlus.Behaviours
 
                 PlayerUtility.PlayerSwatch(line.Swatch, player);
 
-                LogSource.LogInfo($"Scoreboard line created -> NickName '{player.NickName}', ActorNumber '{player.ActorNumber}'");
+                //LogSource.LogInfo($"Scoreboard line created -> NickName '{player.NickName}', ActorNumber '{player.ActorNumber}'");
 
                 index++;
             }
